@@ -47,14 +47,14 @@ tpoints = [[0,domeht],  [domeht, 0], [0,0]];
 // Uncomment this to display the slot mount for the Arduino
 //arduino_slot();
 
-for (b=[-50,-25,0]) {
-//for (b=[]) {
-    build_dome(b, 1);
-}
+//for (b=[-50,-25,0]) {
+//for (b=[0]) {
+//    build_dome(b, 1);
+//}
 
-build_dome(25,2);
+//build_dome(25,2);
 build_dome(-75,3);
-build_bar();
+//build_bar();
 
 // printed with 5 perimiters at 0.2 to make sure the bars were not hollow
 module build_bar() {
@@ -92,10 +92,11 @@ module build_dome (b,type) {
                 }
             }
         }
-        if (type == 1) {
+        if (type == 1 || type == 3) {
             // Each dome needs 4 pins for mounting
+            pinoffset=[ 0, 0, 0, 3.5];
             rotate([0,0,z+45])
-                translate([0,domedia+shortedge,b-riseroffset])
+                translate([0,domedia+shortedge-5,b-riseroffset+pinoffset[type]])
                     pinpeg(h=2*pinht, r=3.5, lh=3, lt=1);
         }
     }
